@@ -25,8 +25,8 @@ func init() {
 }
 
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()  //解析参数，默认是不会解析的
-	fmt.Println(r.Form)  //这些信息是输出到服务器端的打印信息
+	r.ParseForm()       //解析参数，默认是不会解析的
+	fmt.Println(r.Form) //这些信息是输出到服务器端的打印信息
 	fmt.Println("path", r.URL.Path)
 	fmt.Println("scheme", r.URL.Scheme)
 	fmt.Println(r.Form["url_long"])
@@ -52,9 +52,9 @@ func login(w http.ResponseWriter, r *http.Request) {
 		t.Execute(w, token)
 		sess.Set("token", token)
 	} else {
-		r.ParseForm()  //解析参数，默认是不会解析的
+		r.ParseForm() //解析参数，默认是不会解析的
 		//请求的是登录数据，那么执行登录的逻辑判断
-		if len(r.Form["username"][0])==0{
+		if len(r.Form["username"][0]) == 0 {
 			//为空的处理
 			fmt.Fprintf(w, "username is null")
 			return
@@ -114,7 +114,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		}
 		defer file.Close()
 		fmt.Fprintf(w, "%v", handler.Header)
-		f, err := os.OpenFile("./test/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)  // 此处假设当前目录下已存在test目录
+		f, err := os.OpenFile("./test/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666) // 此处假设当前目录下已存在test目录
 		if err != nil {
 			fmt.Println(err)
 			return
