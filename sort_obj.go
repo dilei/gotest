@@ -3,13 +3,12 @@ package main
 import (
 	"fmt"
 	"sort"
-	"strings"
 )
 
 type AttribNameValue struct {
-	Name string
-	Age  int
-	email  string
+	Name  string
+	Age   int
+	email string
 }
 
 type AttribNameValueArray []AttribNameValue
@@ -37,6 +36,14 @@ func (p *AttribNameValueArray) Sort() {
 	sort.Sort(p)
 }
 
+type ByAge struct {
+	AttribNameValueArray
+}
+
+func (p ByAge) Less(i, j int) bool {
+	return p.AttribNameValueArray[i].Age < p.AttribNameValueArray[j].Age
+}
+
 func main() {
 	n1 := AttribNameValue{"dilei", 9, "111"}
 	n2 := AttribNameValue{"dilei", 9, "222"}
@@ -49,16 +56,7 @@ func main() {
 	nArr.Sort()
 	fmt.Println(nArr)
 
-	strArr := strings.Split("", ",")
-	fmt.Println(strArr[0])
+	byage := ByAge{nArr}
+	fmt.Println(byage.Len())
 
-	mapObj := make(map[int]map[int]interface{})
-	tmp := make(map[int]interface{})
-	tmp[1] = 123
-	mapObj[1] = tmp
-
-	var res int
-	res = mapObj[0][123].(int)
-	fmt.Println(res)
 }
-
