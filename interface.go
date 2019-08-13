@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	var data interface{}
@@ -9,13 +11,18 @@ func main() {
 	data = nil
 	data = []int64{1, 2, 3}
 
+	data = "123"
+
 	// 如果类型断言错误 typeErr为int64的零值
 	// 下面的方式会出现panic
-	// typeErr := data.(int64)
-	typeErr, ok := data.(int64)
-	if ok {
-		fmt.Println(typeErr)
-	}
+	typeErr := data.(int)
+	fmt.Println(typeErr)
+
+	// 正确方式
+	// typeErr, ok := data.(int64)
+	// if ok {
+	// 	fmt.Println(typeErr)
+	// }
 
 	switch data.(type) {
 	case int:
