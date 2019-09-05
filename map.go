@@ -132,7 +132,14 @@ func main() {
 
 	m := make(map[int]int)
 	var m1 map[int]int
+	fmt.Println(m)
+	fmt.Println(len(m))
 	fmt.Println(m == nil)
 	fmt.Println(m1 == nil)
+
+	m2 := make(map[int][]int)
+	m2[3] = []int{1, 2, 3}
+	// 不存在的key会返回默认零值
+	fmt.Println(m2[4])
 
 }

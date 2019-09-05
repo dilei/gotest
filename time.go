@@ -33,6 +33,8 @@ func main() {
 	const longForm = "Jan 2, 2006 at 3:04pm"
 	t, _ := time.Parse(longForm, "Feb 3, 2013 at 7:54pm")
 	fmt.Println(t)
+	fmt.Println("string time")
+	fmt.Println(t.String())
 
 	// shortForm is another way the reference time would be represented
 	// in the desired layout; it has no time zone present.
