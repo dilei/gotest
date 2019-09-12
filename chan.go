@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 /*
 func main() {
@@ -40,6 +43,7 @@ func main() {
 	ch1 <- 3
 	elem1 := <-ch1
 	fmt.Printf("first element: %v", elem1)
+	fmt.Println()
 
 	/*
 		c := make(chan int)
@@ -61,4 +65,21 @@ func main() {
 		}()
 		<- o  // 2、当上面有一个并发线程时，他的作用是阻塞函数直到通道可读，即使线程没有写通道
 	*/
+
+	ch2 := make(chan int, 2)
+	// close(ch2)  // 关闭通道会导致在获取时返回零值，相应使用select时，每次都会选中
+	ch2 <- 1
+
+	var intV int
+	select {
+	case intV = <-ch2:
+		// if ok {
+		// 	fmt.Println("ch2 selected")
+		// } else {
+		// 	fmt.Println("ch2 closed")
+		// }
+		fmt.Println("ch2 selected")
+	case <-time.After(2 * time.Second): // 2s超时
+	}
+	fmt.Println(intV)
 }
