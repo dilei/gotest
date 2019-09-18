@@ -7,8 +7,7 @@ func main() {
 	// Ambiguous reference 'Name'
 	// fmt.Println(ps.Name)
 
-	fmt.Println(ps.UserS.Name)
-	fmt.Println(ps.AdminS.Name)
+	fmt.Println(ps.UserS.Name, ps.AdminS.Name)
 
 	as := AdminS{}
 	fmt.Println(as.Member == nil)
@@ -34,6 +33,8 @@ func main() {
 	fmt.Println(isOne)
 
 	fmt.Println(ps)
+
+	fmt.Scan()
 
 }
 

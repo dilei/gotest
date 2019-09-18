@@ -13,6 +13,9 @@ func say(s string) {
 }
 
 func main() {
+	if x := 10; x >= 10 {
+
+	}
 	// 子线程painc会导致主进程挂掉
 	go say("world")
 	time.Sleep(1000 * time.Millisecond)
