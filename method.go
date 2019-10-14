@@ -19,8 +19,9 @@ type Employee struct {
 }
 
 //Human定义method
-func (h *Human) SayHi() {
+func (h *Human) SayHi() *Human {
 	fmt.Printf("Hi, I am am %s you can call me on %s\n", h.name, h.phone)
+	return h
 }
 
 //Employee的method重写Human的method
@@ -35,5 +36,8 @@ func main() {
 
 	mark.SayHi()
 	sam.SayHi()
-	sam.Human.SayHi()
+	sam.Human.
+		SayHi().
+		SayHi().
+		SayHi()
 }

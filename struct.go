@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	ps := PersonS{AdminS{Name: "dilei"}, UserS{"dilei2"}, 23}
+	ps := PersonS{AdminS{Name: "dilei"}, UserS{"dilei2"}, 23, struct{}{}}
 	// Ambiguous reference 'Name'
 	// fmt.Println(ps.Name)
 
@@ -34,7 +34,8 @@ func main() {
 
 	fmt.Println(ps)
 
-	fmt.Scan()
+	obj := struct{}{} // 空结构体不占用内存空间
+	fmt.Println(obj)
 
 }
 
@@ -46,6 +47,7 @@ type PersonS struct {
 	AdminS
 	UserS
 	Age int
+	Obj struct{}
 }
 
 type AdminS struct {
