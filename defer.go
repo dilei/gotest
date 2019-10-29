@@ -1,5 +1,11 @@
 package main
 
+import (
+	"fmt"
+	"log"
+	"time"
+)
+
 /*
 return xxx这一条语句并不是一条原子指令!
 函数返回的过程是这样的：先给返回值赋值，然后调用defer表达式，最后才是返回到调用函数中。
@@ -9,6 +15,14 @@ defer表达式可能会在设置函数返回值之后，在返回到调用函数
 调用defer函数
 空的return
 */
+
+func f12() (result int) {
+	defer func() {
+		result++
+	}()
+	// 先把10 赋值给result，然后再++， 结果是11
+	return 10
+}
 
 /*
    z   // 无需创建新的返回变量
@@ -38,6 +52,23 @@ func add2(x, y int) int {
 }
 
 func main() {
+	println(f12())  // 输出:
 	println(add(1, 2))  // 输出: 103
 	println(add2(1, 2)) // 输出: 3
+
+	bigSlowOperation()
+}
+
+func bigSlowOperation() {
+	defer trace("bigSlowOperation")() // 别忘记这对圆括号
+	// defer trace("bigSlowOperation") // 没有圆括号
+	defer fmt.Print(132)
+	// 这里是一些处理
+	time.Sleep(10 * time.Second)  // 通过休眠仿真慢操作
+}
+
+func trace(msg string) func() {
+	start := time.Now()
+	log.Printf("enter %s", msg)
+	return func (){log.Printf("exit %s (%s)", msg, time.Since(start))}
 }

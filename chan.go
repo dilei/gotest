@@ -44,15 +44,15 @@ func main() {
 	fmt.Printf("first element: %v", elem1)
 	fmt.Println(fmt.Sprintf("%.02f", 12.1))
 
-	var ch chan bool
-	ch <- true
+	ch := make(chan bool)
+	// ch <- true
 	go func() {
 		defer func() {
 			if x := recover(); x != nil {
 				fmt.Println("error")
 			}
 		}()
-		panic("123")
+		// panic("123")
 		ch <- true
 		return
 	}()
@@ -61,6 +61,9 @@ func main() {
 		fmt.Println(true)
 	}
 	fmt.Println(i)
+	fmt.Println(ch)
+	close(ch)
+	fmt.Println(ch == nil)
 
 	/*
 		c := make(chan int)

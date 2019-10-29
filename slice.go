@@ -40,7 +40,22 @@ func main() {
 		fmt.Println(key, val)
 	}
 
+	ss := []int{0,1,2,3,4,5}
+	fmt.Println(len(ss), cap(ss))
+	// fmt.Println(remove(ss, 5))
+	// fmt.Println(ss)
+	fmt.Println(remove(ss, 0))
+	fmt.Println(len(ss), cap(ss))
+	fmt.Println(ss)
+
 }
+
+func remove(slice []int, i int) []int {
+	copy(slice[i:], slice[i+1:])
+	return slice[ :len(slice)-1]
+}
+
+
 
 type sdog struct {
 	Name string
