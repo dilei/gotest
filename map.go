@@ -142,4 +142,13 @@ func main() {
 	// 不存在的key会返回默认零值
 	fmt.Println(m2[4])
 
+	var m3 map[int]int
+	fmt.Println(m3[1])
+
+	m3[1] = 1
+
+	if val, ok := m3[1]; ok {
+		fmt.Println(val)
+	}
+
 }

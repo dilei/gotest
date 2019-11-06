@@ -19,5 +19,6 @@ replace (
 
 require (
 	github.com/astaxie/session v0.0.0-20130408050157-95d7fe18579c
+	github.com/philchia/agollo v2.1.0+incompatible // indirect
 	github.com/valyala/fasthttp v1.4.0
 )
