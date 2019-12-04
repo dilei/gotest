@@ -1,65 +1,11 @@
-package main
+package apollotest
 
 import (
-	"bufio"
-	// "encoding/json"
 	"fmt"
-	"github.com/philchia/agollo"
 	"gopkg.in/yaml.v2"
-	"os"
-	"strings"
 )
 
-func main() {
-	err := agollo.StartWithConfFile("app.properties")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	// val := agollo.GetStringValue("consul.client.ip", "unknow")
-	// fmt.Println(val)
-
-	// 监听
-	go func() {
-		for {
-			events := agollo.WatchUpdate()
-			changeEvent := <-events
-			// bytes, _ := json.Marshal(changeEvent)
-			// fmt.Println("event:", string(bytes))
-			yamlStr := changeEvent.Changes["content"].NewValue
-			var config Conf
-			err = yaml.Unmarshal([]byte(yamlStr), &config)
-			if err != nil {
-				fmt.Println(err.Error())
-			}
-			fmt.Println(config.Memcache)
-		}
-	}()
-
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("is stop?(y/n)")
-	for {
-		fmt.Print("-> ")
-		text, _ := reader.ReadString('\n')
-		// convert CRLF to LF
-		text = strings.Replace(text, "\n", "", -1)
-		if strings.Compare("y", text) == 0 {
-			fmt.Println("stop")
-			break
-		}
-	}
-
-	// 非kv形式的配置
-	// res := agollo.GetNameSpaceContent("go-prodapi.yaml", "unknow")
-	// fmt.Println(res)
-
-	// res2 := agollo.GetAllKeys("application")
-	// fmt.Println(res2)
-
-	// 没这个方法了？
-	// agollo.SubscribeToNamespaces("newNamespace1", "newNamespace2")
-}
-
+//profile variables
 type Conf struct {
 	Db struct {
 		Product string `yaml:"product"`
@@ -99,4 +45,27 @@ type Conf struct {
 	ShopDDVipDiscount  map[int]float64 `yaml:"shopDDVipDiscount"`
 	PartnerShop        []int64         `yaml:"partnerShop"`
 	StockDealPromoType []string        `yaml:"stockDealPromoType"`
+}
+
+var (
+	config     *Conf
+	configPath string
+)
+
+func NewConf() *Conf {
+	if config != nil {
+		return config
+	}
+
+	var (
+		err      error
+		yamlFile []byte
+	)
+
+	err = yaml.Unmarshal(yamlFile, config)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	return config
 }

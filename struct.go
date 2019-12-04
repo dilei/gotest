@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 func main() {
 	ps := PersonS{AdminS{Name: "dilei"}, UserS{"dilei2"}, 23, struct{}{}}
@@ -8,6 +11,18 @@ func main() {
 	// fmt.Println(ps.Name)
 
 	fmt.Println(ps.UserS.Name, ps.AdminS.Name)
+	byteArr, err := json.Marshal(ps)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	fmt.Println(string(byteArr))
+
+	ps2 := PersonS2{UserS{"dilei2"}, 23}
+	byteArr, err = json.Marshal(ps2)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	fmt.Println(string(byteArr))
 
 	as := AdminS{}
 	fmt.Println(as.Member == nil)
@@ -50,6 +65,10 @@ type PersonS struct {
 	Obj struct{}
 }
 
+type PersonS2 struct {
+	UserS
+	Age int
+}
 type AdminS struct {
 	Name   string
 	Member map[int64]int64
@@ -58,3 +77,11 @@ type AdminS struct {
 type UserS struct {
 	Name string
 }
+
+func (u UserS) GetName() string {
+	return "name"
+}
+
+type U2 UserS
+
+var u2 U2
