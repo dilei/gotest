@@ -26,6 +26,7 @@ func main() {
 		child2[k] = v
 	}
 
+	// 模拟序列化栈溢出
 	tmp[123]["ebook"] = child1
 	// tmp[321]["book"] = tmp[123]
 	tmp[321]["book"] = child2

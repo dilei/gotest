@@ -19,8 +19,10 @@ replace (
 
 require (
 	github.com/astaxie/session v0.0.0-20130408050157-95d7fe18579c
+	github.com/jinzhu/gorm v1.9.11
 	github.com/philchia/agollo v2.1.0+incompatible
 	github.com/valyala/fasthttp v1.4.0
 	golang.org/x/net v0.0.0-20190620200207-3b0461eec859
+	gopkg.in/guregu/null.v3 v3.4.0 // indirect
 	gopkg.in/yaml.v2 v2.2.5
 )

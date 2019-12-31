@@ -6,18 +6,17 @@ import (
 )
 
 func main() {
-	ps := PersonS{AdminS{Name: "dilei"}, UserS{"dilei2"}, 23, struct{}{}}
+	ps := PersonS{UserS{"dilei2", "1231"}, "ddd", 23, struct{}{}}
 	// Ambiguous reference 'Name'
 	// fmt.Println(ps.Name)
 
-	fmt.Println(ps.UserS.Name, ps.AdminS.Name)
 	byteArr, err := json.Marshal(ps)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
 	fmt.Println(string(byteArr))
 
-	ps2 := PersonS2{UserS{"dilei2"}, 23}
+	ps2 := PersonS2{UserS{"dilei2", "123"}, 23}
 	byteArr, err = json.Marshal(ps2)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -59,10 +58,10 @@ func setName(as AdminS) {
 }
 
 type PersonS struct {
-	AdminS
 	UserS
-	Age int
-	Obj struct{}
+	Name string
+	Age  int
+	Obj  struct{}
 }
 
 type PersonS2 struct {
@@ -75,7 +74,8 @@ type AdminS struct {
 }
 
 type UserS struct {
-	Name string
+	Name  string
+	Email string
 }
 
 func (u UserS) GetName() string {

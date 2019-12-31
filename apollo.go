@@ -2,13 +2,32 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
+
 	// "encoding/json"
 	"fmt"
 	"github.com/philchia/agollo"
-	"gopkg.in/yaml.v2"
 	"os"
 	"strings"
 )
+
+type APP struct {
+	ImgType                  string          `json:"const_img_type"`
+	ImgIdc                   int             `json:"const_img_idc"`
+	SetUpTest                int             `json:"const_set_up_test"`
+	FlashSalesProductType    []int           `json:"const_flash_sales_product_type"`
+	BindProductType          int             `json:"const_bind_product_type"`
+	StockAlarmNum            int             `json:"const_stock_alarm_num"`
+	GlobalMallStock          []string        `json:"const_global_mall_stock"`
+	GlobalMallWarehouse      []string        `json:"const_global_mall_warehouse"`
+	GlobalPublishStock       []string        `json:"const_global_publish_stock"`
+	GiftCardCategoryPathLow  int             `json:"const_gift_card_category_path_low"`
+	GiftCardCategoryPathHigh int             `json:"const_gift_card_category_path_high"`
+	ShopDDVipDiscount        map[int]float64 `json:"shop_ddvip_discount"`
+	PartnerShop              []int64         `json:"partner_shop"`
+	StockDealPromoType       []string        `json:"stock_deal_promo_type"`
+	DDOwnerShopId            []int           `json:"ddowner_shop_id"`
+}
 
 func main() {
 	err := agollo.StartWithConfFile("app.properties")
@@ -16,23 +35,26 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	// val := agollo.GetStringValue("consul.client.ip", "unknow")
-	// fmt.Println(val)
+	val := agollo.GetStringValue("partner_shop", "unknow")
+	fmt.Println(val)
+	res := agollo.GetNameSpaceContent("app.json", "unknow")
+	fmt.Println(res)
+	var app APP
+	err = json.Unmarshal([]byte(res), &app)
+	if err != nil {
+		fmt.Print(err)
+	}
+	fmt.Println(app)
 
 	// 监听
 	go func() {
 		for {
 			events := agollo.WatchUpdate()
 			changeEvent := <-events
-			// bytes, _ := json.Marshal(changeEvent)
-			// fmt.Println("event:", string(bytes))
-			yamlStr := changeEvent.Changes["content"].NewValue
-			var config Conf
-			err = yaml.Unmarshal([]byte(yamlStr), &config)
-			if err != nil {
-				fmt.Println(err.Error())
-			}
-			fmt.Println(config.Memcache)
+			bytes, _ := json.Marshal(changeEvent)
+			fmt.Println("event:", string(bytes))
+			res := agollo.GetNameSpaceContent("app.json", "unknow")
+			fmt.Println(res)
 		}
 	}()
 
