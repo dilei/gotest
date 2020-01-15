@@ -36,4 +36,28 @@ func main() {
 	}
 	fmt.Println(string(byteArr))
 
+	var nums = []int{1, 2, 3}
+	fmt.Println(subsets(nums))
+}
+func subsets(nums []int) [][]int {
+	res := [][]int{}
+	tmp := []int{}
+	for i := 0; i <= len(nums); i++ {
+		dfs(nums, &res, tmp, i, 0)
+	}
+	return res
+}
+
+func dfs(nums []int, res *[][]int, tmp []int, k, start int) {
+	if len(tmp) == k {
+		cur := make([]int, k)
+		copy(cur, tmp)
+		*res = append(*res, cur)
+		return
+	}
+	for i := start; i < len(nums); i++ {
+		tmp = append(tmp, nums[i])
+		dfs(nums, res, tmp, k, i+1)
+		tmp = tmp[:len(tmp)-1]
+	}
 }

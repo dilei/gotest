@@ -5,6 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"gopkg.in/guregu/null.v3"
+	"reflect"
 	"time"
 )
 
@@ -26,13 +27,11 @@ func main() {
 	fmt.Println(cate)
 }
 
-func query(obj interface{}, sql string) {
+func query(obj interface{}, sql string) interface{} {
 	conn, err := gorm.Open("mysql", "writeuser:ddbackend@tcp(10.255.255.22)/ProductDB?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		fmt.Println(err.Error())
-		return
 	}
-	data := obj.(*CategoryLimit)
-	conn.Table("category_limit").Where(sql).Find(&data)
-	fmt.Println(data)
+	_ = conn
+	return nil
 }
