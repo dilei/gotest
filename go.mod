@@ -12,8 +12,8 @@ replace (
 	golang.org/x/sys => github.com/golang/sys v0.0.0-20190826190057-c7b8b68b1456
 	golang.org/x/text => github.com/golang/text v0.3.2
 	golang.org/x/time => github.com/golang/time v0.0.0-20190308202827-9d24e82272b4
-	golang.org/x/tools => github.com/golang/tools v0.0.0-20190827205025-b29f5f60c37a
-	golang.org/x/xerrors => github.com/golang/xerrors v0.0.0-20190717185122-a985d3407aa7
+	golang.org/x/tools => github.com/golang/tools v0.0.0-20200522201501-cb1345f3a375
+	golang.org/x/xerrors => github.com/golang/xerrors v0.0.0-20191204190536-9bdfabe68543
 
 )
 
@@ -21,10 +21,11 @@ require (
 	github.com/astaxie/session v0.0.0-20130408050157-95d7fe18579c
 	github.com/go-redis/redis/v7 v7.0.0-beta.5
 	github.com/go-sql-driver/mysql v1.4.1
+	github.com/golang/mock v1.4.3
 	github.com/philchia/agollo v2.1.0+incompatible
-	github.com/techoner/gophp v0.1.0
 	github.com/valyala/fasthttp v1.4.0
-	golang.org/x/net v0.0.0-20190923162816-aa69164e4478
+	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
+	golang.org/x/tools v0.0.0-20200522201501-cb1345f3a375 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
 	gopkg.in/yaml.v2 v2.2.5
 )
