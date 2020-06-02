@@ -23,6 +23,26 @@ func main() {
 	fmt.Println(strings.Compare("24.06", "9"))
 
 	fmt.Printf("%v", numDecodings("110"))
+
+	str := "Go爱好者123"
+	for i, c := range str {
+		fmt.Printf("%d: %q [% x]\n", i, c, []byte(string(c)))
+	}
+
+	fmt.Printf("The string: %q\n", str)
+	fmt.Printf("  => runes(char): %q\n", []rune(str))
+	fmt.Printf("  => runes(hex): %x\n", []rune(str))
+	fmt.Printf("  => bytes(hex): [% x]\n", []byte(str))
+
+	fmt.Println(string(-1))
+	fmt.Println(string(1))
+	fmt.Println(string(3))
+	// 以下都是表示的数字 1
+	fmt.Println(string(49))   // 49 表示 十进制的49（061   49    31    1）
+	fmt.Println(string(0x31)) // 表示 十六进制的49（061   49    31    1）
+	fmt.Printf("[% x]\n", []byte(string(49)))
+	// 以下都是表示的字符 a
+	fmt.Println(string(0x61)) // 表示 十六进制61（141   97    61    a）
 }
 
 func clean(str string) (string, string) {
