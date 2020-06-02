@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
+	fmt.Println(string(-1))
+
 	var arr []string
 	arr2 := []int{1, 2, 3, 4}
 	fmt.Println(arr, arr2)
