@@ -43,6 +43,15 @@ func main() {
 	fmt.Printf("[% x]\n", []byte(string(49)))
 	// 以下都是表示的字符 a
 	fmt.Println(string(0x61)) // 表示 十六进制61（141   97    61    a）
+
+	str2 := str
+	// 为什么输出不是指向的同一个地址？
+	// type stringStruct struct {
+	// 	str unsafe.Pointer
+	// 	len int
+	// }
+	// 因为string是一个结构体，结构体内部是指向字符串的指针(str)，str属性指向的是相同的地址，二字符串str2和str不是同一个结构体
+	fmt.Printf("str: %p str2: %p\n", &str, &str2) // str: 0xc0000361f0 str2: 0xc000036210
 }
 
 func clean(str string) (string, string) {
