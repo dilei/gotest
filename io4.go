@@ -44,6 +44,7 @@ func main() {
 		writer1.Available())
 	fmt.Println("Flush the buffer in the writer ...")
 	writer1.Flush()
+	fmt.Println(basicWriter1.String())
 	fmt.Println()
 
 	// 示例3。
