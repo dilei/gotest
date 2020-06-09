@@ -19,13 +19,24 @@ replace (
 
 require (
 	github.com/astaxie/session v0.0.0-20130408050157-95d7fe18579c
+	github.com/coreos/etcd v3.3.22+incompatible
+	github.com/coreos/go-semver v0.3.0 // indirect
+	github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f // indirect
+	github.com/daizuozhuo/etcd-service-discovery v0.0.0-20170813133207-32e3e614e2d5
 	github.com/go-redis/redis/v7 v7.0.0-beta.5
 	github.com/go-sql-driver/mysql v1.4.1
+	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golang/mock v1.4.3
+	github.com/golang/protobuf v1.4.2 // indirect
+	github.com/google/uuid v1.1.1 // indirect
+	github.com/json-iterator/go v1.1.10 // indirect
+	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/philchia/agollo v2.1.0+incompatible
 	github.com/valyala/fasthttp v1.4.0
-	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
+	go.uber.org/zap v1.15.0 // indirect
+	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
+	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980 // indirect
 	golang.org/x/tools v0.0.0-20200522201501-cb1345f3a375 // indirect
-	google.golang.org/appengine v1.6.1 // indirect
+	google.golang.org/grpc v1.26.0 // indirect
 	gopkg.in/yaml.v2 v2.2.5
 )
