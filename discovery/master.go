@@ -86,7 +86,7 @@ func (m *Master) UpdateWorker(info *WorkerInfo) {
 
 func (m *Master) WatchWorkers() {
 	api := m.KeysAPI
-	rch := api.Watch(context.TODO(), "workers/")
+	rch := api.Watch(context.TODO(), "workers/", clientv3.WithPrefix())
 	for wresp := range rch {
 		for _, ev := range wresp.Events {
 			fmt.Printf("%s %q : %q\n", ev.Type, ev.Kv.Key, ev.Kv.Value)

@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"runtime"
@@ -71,7 +72,6 @@ func NewWorker(name, IP string, endpoints []string) *Worker {
 
 func (w *Worker) HeartBeat() {
 	api := w.KeysAPI
-
 	for {
 		info := &WorkerInfo{
 			Name: w.Name,
@@ -82,10 +82,20 @@ func (w *Worker) HeartBeat() {
 		key := "workers/" + w.Name
 		value, _ := json.Marshal(info)
 
-		_, err := api.Put(context.Background(), key, string(value))
+		timeoutCtx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+		defer cancel()
+		_, err := api.Put(timeoutCtx, key, string(value))
 		if err != nil {
 			log.Println("Error update workerInfo:", err)
 		}
-		time.Sleep(time.Second * 3)
+
+		timeoutCtx2, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+		defer cancel()
+		res, err := api.Get(timeoutCtx2, key)
+		if err != nil {
+			log.Println("Error:", err)
+		}
+		fmt.Println(string(res.Kvs[0].Value))
+		time.Sleep(time.Second * 2)
 	}
 }
