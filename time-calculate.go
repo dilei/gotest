@@ -52,5 +52,6 @@ func main() {
 
 	fmt.Println(t2, t3, t3.String())
 	fmt.Println(t2.Seconds())
-
+	// 10s
+	fmt.Print(time.Duration(10) * time.Second)
 }
