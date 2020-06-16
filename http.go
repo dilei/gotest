@@ -3,8 +3,6 @@ package main
 import (
 	"crypto/md5"
 	"fmt"
-	"github.com/astaxie/session"
-	_ "github.com/astaxie/session/providers/memory"
 	"html/template"
 	"io"
 	"log"
@@ -15,6 +13,9 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/astaxie/session"
+	_ "github.com/astaxie/session/providers/memory"
 )
 
 var globalSessions *session.Manager
@@ -89,7 +90,7 @@ func main() {
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/upload", upload)
 
-	err := http.ListenAndServe(":9090", nil) //设置监听的端口
+	err := http.ListenAndServe("", nil) //设置监听的端口
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}

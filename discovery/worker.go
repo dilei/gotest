@@ -91,7 +91,9 @@ func (w *Worker) HeartBeat() {
 
 		timeoutCtx2, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 		defer cancel()
-		res, err := api.Get(timeoutCtx2, key)
+		// op example
+		// clientv3.WithPrefix()
+		res, err := api.Get(timeoutCtx2, key, clientv3.WithPrefix())
 		if err != nil {
 			log.Println("Error:", err)
 		}
