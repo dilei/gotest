@@ -31,6 +31,7 @@ require (
 	github.com/google/uuid v1.1.1 // indirect
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
+	github.com/nsqio/go-nsq v1.0.8
 	github.com/philchia/agollo v2.1.0+incompatible
 	github.com/valyala/fasthttp v1.4.0
 	go.uber.org/zap v1.15.0 // indirect
