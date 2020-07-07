@@ -3,6 +3,20 @@ package main
 import "fmt"
 
 func main() {
+	var arr1 []int
+	arr1 = append(arr1, []int{1, 2, 3, 4}...)
+	fmt.Println(arr1, len(arr1), cap(arr1))
+	// arr1 = arr1[0:5] // 下标不能超过cap
+
+	arr2 := make([]int, len(arr1), cap(arr1)*2)
+	copy(arr2, arr1)
+	arr1 = arr2
+	fmt.Println(arr1, len(arr1), cap(arr1))
+
+	arr1 = arr1[0:5]
+	arr1[4] = 5
+	fmt.Println(arr1, len(arr1), cap(arr1))
+
 	data := [...]int{0, 1, 2, 3, 4, 5, 6}
 	slice := data[1:4:5] // [low : high : max]
 	fmt.Println(slice, len(slice), cap(slice))
@@ -31,8 +45,8 @@ func main() {
 	// 合并切片
 	var nullArr []int
 	var arr = []int{1, 2, 3}
-	arr2 := append(nullArr, arr...)
-	fmt.Println(arr2)
+	arr3 := append(nullArr, arr...)
+	fmt.Println(arr3)
 
 	// 遍历空切片
 	for key, val := range nullArr {
@@ -40,7 +54,7 @@ func main() {
 		fmt.Println(key, val)
 	}
 
-	ss := []int{0,1,2,3,4,5}
+	ss := []int{0, 1, 2, 3, 4, 5}
 	fmt.Println(len(ss), cap(ss))
 	// fmt.Println(remove(ss, 5))
 	// fmt.Println(ss)
@@ -52,10 +66,8 @@ func main() {
 
 func remove(slice []int, i int) []int {
 	copy(slice[i:], slice[i+1:])
-	return slice[ :len(slice)-1]
+	return slice[:len(slice)-1]
 }
-
-
 
 type sdog struct {
 	Name string

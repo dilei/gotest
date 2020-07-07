@@ -64,7 +64,7 @@ func produce1() {
 func consumer1() {
 	// Instantiate a consumer that will subscribe to the provided channel.
 	config := nsq.NewConfig()
-	consumer, err := nsq.NewConsumer("test", "ch01", config)
+	consumer, err := nsq.NewConsumer("test", "ch02", config)
 	if err != nil {
 		log.Fatal(err)
 	}
