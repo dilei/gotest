@@ -36,6 +36,7 @@ func main() {
 
 	fmt.Println(string(-1))
 	fmt.Println(string(1))
+	fmt.Println(byte(1))
 	fmt.Println(string(3))
 	// 以下都是表示的数字 1
 	fmt.Println(string(49))   // 49 表示 十进制的49（061   49    31    1）
